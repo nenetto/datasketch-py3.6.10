@@ -1,4 +1,3 @@
-from __future__ import annotations
 import struct, copy
 from typing import Callable, Optional
 import numpy as np
@@ -163,7 +162,7 @@ class HyperLogLog(object):
         # Large range correction
         return self._largerange_correction(e)
 
-    def merge(self, other: HyperLogLog) -> None:
+    def merge(self, other) -> None:
         """
         Merge the other HyperLogLog with this one, making this the union of the
         two.
@@ -185,7 +184,7 @@ class HyperLogLog(object):
         """
         return copy.copy(self.reg)
 
-    def copy(self) -> HyperLogLog:
+    def copy(self):
         """
         Create a copy of the current HyperLogLog by exporting its state.
 
@@ -218,7 +217,7 @@ class HyperLogLog(object):
         """
         return len(self.reg)
 
-    def __eq__(self, other: HyperLogLog) -> bool:
+    def __eq__(self, other) -> bool:
         """
         Check equivalence between two HyperLogLogs
 
@@ -252,7 +251,7 @@ class HyperLogLog(object):
         return -(1 << 32) * np.log(1.0 - e / (1 << 32))
 
     @classmethod
-    def union(cls, *hyperloglogs: HyperLogLog) -> HyperLogLog:
+    def union(cls, *hyperloglogs):
         if len(hyperloglogs) < 2:
             raise ValueError(
                 "Cannot union less than 2 HyperLogLog\

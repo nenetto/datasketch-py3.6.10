@@ -1,4 +1,3 @@
-from __future__ import annotations
 import struct
 from typing import Iterable
 import numpy as np
@@ -97,7 +96,7 @@ class LeanMinHash(MinHash):
         """
         raise TypeError("Cannot update a LeanMinHash")
 
-    def copy(self) -> LeanMinHash:
+    def copy(self):
         lmh = object.__new__(LeanMinHash)
         lmh._initialize_slots(*self.__slots__)
         return lmh
@@ -175,7 +174,7 @@ class LeanMinHash(MinHash):
         struct.pack_into(fmt, buf, 0, self.seed, len(self), *self.hashvalues)
 
     @classmethod
-    def deserialize(cls, buf, byteorder="@") -> LeanMinHash:
+    def deserialize(cls, buf, byteorder="@"):
         """
         Deserialize a lean MinHash from a buffer.
 
@@ -235,7 +234,7 @@ class LeanMinHash(MinHash):
         return hash((self.seed, tuple(self.hashvalues)))
 
     @classmethod
-    def union(cls, *lmhs: LeanMinHash) -> LeanMinHash:
+    def union(cls, *lmhs):
         """Create a new lean MinHash by unioning multiple lean MinHash."""
         if len(lmhs) < 2:
             raise ValueError("Cannot union less than 2 MinHash")

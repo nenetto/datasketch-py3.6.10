@@ -1,4 +1,3 @@
-from __future__ import annotations
 import copy
 from typing import Callable, Generator, Iterable, List, Optional, Tuple
 import warnings
@@ -183,7 +182,7 @@ class MinHash(object):
         phv = (hv * a + b) % _mersenne_prime & _max_hash
         self.hashvalues = np.vstack([phv, self.hashvalues]).min(axis=0)
 
-    def jaccard(self, other: MinHash) -> float:
+    def jaccard(self, other) -> float:
         """Estimate the `Jaccard similarity`_ (resemblance) between the sets
         represented by this MinHash and the other.
 
@@ -221,7 +220,7 @@ class MinHash(object):
         k = len(self)
         return float(k) / np.sum(self.hashvalues / float(_max_hash)) - 1.0
 
-    def merge(self, other: MinHash) -> None:
+    def merge(self, other) -> None:
         """Merge the other MinHash with this one, making this one the union
         of both.
 
@@ -270,7 +269,7 @@ class MinHash(object):
         """
         self.hashvalues = self._init_hashvalues(len(self))
 
-    def copy(self) -> MinHash:
+    def copy(self) :
         """
         Returns:
             MinHash: a copy of this MinHash by exporting its state.
@@ -289,7 +288,7 @@ class MinHash(object):
         """
         return len(self.hashvalues)
 
-    def __eq__(self, other: MinHash) -> bool:
+    def __eq__(self, other) -> bool:
         """
         Returns:
             bool: If their seeds and hash values are both equal then two are equivalent.
@@ -301,7 +300,7 @@ class MinHash(object):
         )
 
     @classmethod
-    def union(cls, *mhs: MinHash) -> MinHash:
+    def union(cls, *mhs) :
         """Create a MinHash which is the union of the MinHash objects passed as arguments.
 
         Args:
@@ -351,7 +350,7 @@ class MinHash(object):
         )
 
     @classmethod
-    def bulk(cls, b: Iterable, **minhash_kwargs) -> List[MinHash]:
+    def bulk(cls, b: Iterable, **minhash_kwargs):
         """Compute MinHashes in bulk. This method avoids unnecessary
         overhead when initializing many minhashes by reusing the initialized
         state.
@@ -378,7 +377,7 @@ class MinHash(object):
         return list(cls.generator(b, **minhash_kwargs))
 
     @classmethod
-    def generator(cls, b: Iterable, **minhash_kwargs) -> Generator[MinHash, None, None]:
+    def generator(cls, b: Iterable, **minhash_kwargs):
         """Compute MinHashes in a generator. This method avoids unnecessary
         overhead when initializing many minhashes by reusing the initialized
         state.

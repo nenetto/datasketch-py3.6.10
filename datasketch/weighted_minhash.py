@@ -1,4 +1,3 @@
-from __future__ import annotations
 from typing import Union, List
 
 import collections.abc
@@ -24,7 +23,7 @@ class WeightedMinHash(object):
         self.seed = seed
         self.hashvalues = hashvalues
 
-    def jaccard(self, other: WeightedMinHash) -> float:
+    def jaccard(self, other) -> float:
         """Estimate the `weighted Jaccard similarity`_ between the
         multi-sets represented by this weighted MinHash and the other.
 
@@ -66,7 +65,7 @@ class WeightedMinHash(object):
         """
         return copy.copy(self.hashvalues)
 
-    def copy(self) -> WeightedMinHash:
+    def copy(self):
         """
         Returns:
             WeightedMinHash: A copy of this weighted MinHash by exporting

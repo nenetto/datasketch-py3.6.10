@@ -1,4 +1,3 @@
-from __future__ import annotations
 from collections import OrderedDict
 import heapq
 from typing import (
@@ -55,7 +54,7 @@ class _Layer(object):
     def __iter__(self) -> Iterable[Hashable]:
         return iter(self._graph)
 
-    def copy(self) -> _Layer:
+    def copy(self):
         """Create a copy of the layer."""
         new_layer = _Layer(None)
         new_layer._graph = {k: dict(v) for k, v in self._graph.items()}
@@ -113,7 +112,7 @@ class _LayerWithReversedEdges(_Layer):
     def __iter__(self) -> Iterable[Hashable]:
         return iter(self._graph)
 
-    def copy(self) -> _LayerWithReversedEdges:
+    def copy(self):
         """Create a copy of the layer."""
         new_layer = _LayerWithReversedEdges(None)
         new_layer._graph = {k: dict(v) for k, v in self._graph.items()}
@@ -149,7 +148,7 @@ class _Node(object):
             f"_Node(key={self.key}, point={self.point}, is_deleted={self.is_deleted})"
         )
 
-    def copy(self) -> _Node:
+    def copy(self):
         return _Node(self.key, self.point, self.is_deleted)
 
 
@@ -392,7 +391,7 @@ class HNSW(MutableMapping):
         self._graphs = []
         self._entry_point = None
 
-    def copy(self) -> HNSW:
+    def copy(self):
         """Create a copy of the index. The copy will have the same parameters
         as the original index and the same keys and points, but will not share
         any index data structures (i.e., graphs) with the original index.
@@ -412,7 +411,7 @@ class HNSW(MutableMapping):
         new_index._random.set_state(self._random.get_state())
         return new_index
 
-    def update(self, other: Union[Mapping, HNSW]) -> None:
+    def update(self, other) -> None:
         """Update the index with the points from the other Mapping or HNSW object,
         overwriting existing keys.
 
@@ -1018,7 +1017,7 @@ class HNSW(MutableMapping):
         for key in keys_to_remove:
             self.remove(key, ef=ef, hard=True)
 
-    def merge(self, other: HNSW) -> HNSW:
+    def merge(self, other):
         """Create a new index by merging the current index with another index.
         The new index will contain all points from both indexes.
         If a point exists in both, the point from the other index will be used.

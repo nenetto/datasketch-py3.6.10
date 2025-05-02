@@ -1,4 +1,3 @@
-from __future__ import annotations
 import pickle
 import struct
 from typing import Callable, Dict, Hashable, List, Optional, Tuple, Union
@@ -228,12 +227,12 @@ class MinHashLSH(object):
 
     def merge(
             self,
-            other: MinHashLSH,
-            check_overlap: bool = False      
+            other,
+            check_overlap: bool = False
     ):
         """Merge the other MinHashLSH with this one, making this one the union
         of both.
-        
+
         Note:
             Only num_perm, number of bands and sizes of each band is checked for equivalency of two MinHashLSH indexes.
             Other initialization parameters threshold, weights, storage_config, prepickle and hash_func are not checked.
@@ -249,7 +248,7 @@ class MinHashLSH(object):
         """
         self._merge(other, check_overlap=check_overlap, buffer=False)
 
-    def insertion_session(self, buffer_size: int = 50000) -> MinHashLSHInsertionSession:
+    def insertion_session(self, buffer_size: int = 50000):
         """
         Create a context manager for fast insertion into this index.
 
@@ -305,7 +304,7 @@ class MinHashLSH(object):
         for H, hashtable in zip(Hs, self.hashtables):
             hashtable.insert(H, key, buffer=buffer)
 
-    def __equivalent(self, other:MinHashLSH) -> bool:
+    def __equivalent(self, other) -> bool:
         """
         Returns:
             bool: If the two MinHashLSH have equal num_perm, number of bands, size of each band then two are equivalent.
@@ -319,10 +318,10 @@ class MinHashLSH(object):
 
     def _merge(
         self,
-        other: MinHashLSH,
+        other,
         check_overlap: bool = False,
         buffer: bool = False
-    ) -> MinHashLSH:
+    ):
         if self.__equivalent(other):
             if check_overlap and set(self.keys).intersection(set(other.keys)):
                 raise ValueError("The keys are overlapping, duplicate key exists.")
@@ -566,7 +565,7 @@ class MinHashLSHInsertionSession:
         self.lsh = lsh
         self.lsh.buffer_size = buffer_size
 
-    def __enter__(self) -> MinHashLSHInsertionSession:
+    def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
