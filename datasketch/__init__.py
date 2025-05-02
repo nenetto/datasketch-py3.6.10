@@ -1,3 +1,4 @@
+import scipy.sparse
 from datasketch.hyperloglog import HyperLogLog, HyperLogLogPlusPlus
 from datasketch.minhash import MinHash
 from datasketch.b_bit_minhash import bBitMinHash
