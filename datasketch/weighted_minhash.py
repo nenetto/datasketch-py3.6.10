@@ -51,6 +51,9 @@ class WeightedMinHash(object):
             )
         # Check how many pairs of (k, t) hashvalues are equal
         jaccard = np.sum(np.all(self.hashvalues == other.hashvalues, axis=1))/self.hashvalues.shape[0]
+
+        # If you need to compare N hashes (Nx..) to M(Mx) hashes producing a Jaccard matrix of (NxM)
+        # numpy.sum(numpy.all(Nhashes == Mhashes[:, np.newaxis], axis=3), axis=2)/Nhashes.shape[1]
         return jaccard
 
     def digest(self) -> np.ndarray:
