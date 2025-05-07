@@ -1,6 +1,8 @@
 datasketch: Big Data Looks Small
 ================================
 
+> **Important notice**: This repo was modified to work with python 3.6.10
+
 .. image:: https://static.pepy.tech/badge/datasketch/month
     :target: https://pepy.tech/project/datasketch
 
@@ -40,9 +42,9 @@ sub-linear query time:
 | `HNSW`_                   | Any                         | Custom Metric Top-K    |
 +---------------------------+-----------------------------+------------------------+
 
-datasketch must be used with Python 3.7 or above, NumPy 1.11 or above, and Scipy. 
+datasketch must be used with Python 3.7 or above, NumPy 1.11 or above, and Scipy.
 
-Note that `MinHash LSH`_ and `MinHash LSH Ensemble`_ also support Redis and Cassandra 
+Note that `MinHash LSH`_ and `MinHash LSH Ensemble`_ also support Redis and Cassandra
 storage layer (see `MinHash LSH at Scale`_).
 
 Install
