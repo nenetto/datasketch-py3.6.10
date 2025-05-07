@@ -50,11 +50,8 @@ class WeightedMinHash(object):
                     different numbers of hash values"
             )
         # Check how many pairs of (k, t) hashvalues are equal
-        intersection = 0
-        for this, that in zip(self.hashvalues, other.hashvalues):
-            if np.array_equal(this, that):
-                intersection += 1
-        return float(intersection) / float(len(self))
+        jaccard = np.sum(np.all(self.hashvalues == other.hashvalues, axis=1))/self.hashvalues.shape[0]
+        return jaccard
 
     def digest(self) -> np.ndarray:
         """Export the hash values, which is the internal state of the
@@ -78,7 +75,7 @@ class WeightedMinHash(object):
         Returns:
             int: The number of hash values.
         """
-        return len(self.hashvalues)
+        return self.hashvalues.shape[0]
 
     def __eq__(self, other) -> bool:
         """
